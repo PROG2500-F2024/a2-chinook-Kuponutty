@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Images\albums.png" />
     <None Remove="Images\artists.png" />
+    <None Remove="Images\chinook.png" />
     <None Remove="Images\home.png" />
     <None Remove="Images\tracks.png" />
   </ItemGroup>
@@ -31,6 +32,7 @@
   <ItemGroup>
     <Resource Include="Images\albums.png" />
     <Resource Include="Images\artists.png" />
+    <Resource Include="Images\chinook.png" />
     <Resource Include="Images\home.png" />
     <Resource Include="Images\tracks.png" />
   </ItemGroup>

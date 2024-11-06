@@ -16,9 +16,9 @@
     </Page.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-        <StackPanel Background="MediumPurple">
+        <StackPanel Style="{StaticResource StackPanelStyle}">
             <!-- Page Heading -->
-            <TextBlock Text="Chinook Tracks Page" Style="{StaticResource HeadingTextStyle}" Foreground="White"></TextBlock>
+            <TextBlock Text="Chinook Tracks Page" Style="{StaticResource HeadingTextStyle}"></TextBlock>
 
             <!-- ListView for Track Items -->
             <ListView ItemsSource="{Binding Source={StaticResource tracksViewSource}}"
@@ -26,7 +26,7 @@
                   ItemContainerStyle="{StaticResource ListViewItemStyle}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <!-- Use Grid for left and right alignment of fields -->
+                        <!-- Grid for left and right alignment of fields -->
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="360" />
@@ -35,25 +35,22 @@
                             <!-- Left-aligned fields: Name and Composer -->
                             <StackPanel Grid.Column="0">
                                 <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="18"/>
-                                <TextBlock FontSize="12">
-                                <Run Text="Composer: " />
-                                <Run Text="{Binding Composer}" />
-                                </TextBlock>
+                                <TextBlock FontSize="12" Text="Composer: {Binding Composer}" />
                             </StackPanel>
 
                             <!-- Right-aligned fields: Length, Size, and Price -->
                             <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Right">
                                 <TextBlock TextAlignment="Right">
-                                <Run Text="Length: " />
-                                <Run Text="{Binding Milliseconds, Converter={StaticResource TimeConverter}}" />
+                                    <Run Text="Length: " />
+                                    <Run Text="{Binding Milliseconds, Converter={StaticResource TimeConverter}}" />
                                 </TextBlock>
                                 <TextBlock TextAlignment="Right">
-                                <Run Text="Size: " />
-                                <Run Text="{Binding Bytes, Converter={StaticResource BytesConverter}}" />
+                                    <Run Text="Size: " />
+                                    <Run Text="{Binding Bytes, Converter={StaticResource BytesConverter}}" />
                                 </TextBlock>
                                 <TextBlock TextAlignment="Right">
-                                <Run Text="Price: $" />
-                                <Run Text="{Binding UnitPrice}" />
+                                    <Run Text="Price: $" />
+                                    <Run Text="{Binding UnitPrice}" />
                                 </TextBlock>
                             </StackPanel>
                         </Grid>

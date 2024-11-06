@@ -13,7 +13,7 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <StackPanel Background="MediumPurple">
-            <TextBlock Text="Chinook Artists Page" Style="{StaticResource HeadingTextStyle}" Foreground="White"></TextBlock>
+            <TextBlock Text="Chinook Artists Page" Style="{StaticResource HeadingTextStyle}"></TextBlock>
             <ListView ItemsSource="{Binding Source={StaticResource artistsViewSource}}"
                       Style="{StaticResource AlbumsListViewStyle}"
                       ItemContainerStyle="{StaticResource ListViewItemStyle}">

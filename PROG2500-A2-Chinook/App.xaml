@@ -10,7 +10,7 @@
                 <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="Margin" Value="10"/>
-                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Foreground" Value="White"/>
             </Style>
 
             <!-- Style for the ListView -->
@@ -33,15 +33,20 @@
             <!-- Style for ListView items -->
         <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="Foreground" Value="DarkBlue"/>
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="Foreground" Value="Purple"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Background" Value="AntiqueWhite"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#ADD8E6"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="StackPanelStyle" TargetType="StackPanel">
+            <Setter Property="Background" Value="MediumPurple" />
+        </Style>
+        
     </Application.Resources>
 </Application>

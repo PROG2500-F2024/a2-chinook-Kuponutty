@@ -7,7 +7,12 @@
         mc:Ignorable="d"
         d:DesignHeight="450" d:DesignWidth="800"
         Title="Home Page">
+
+
+    
     <StackPanel Background="MediumPurple">
-        <TextBlock Text="Chinook - Your one-stop shop for great music!" HorizontalAlignment="Center" FontSize="32" FontWeight="Bold" Foreground="White"></TextBlock>
+        <TextBlock Text="Chinook - Your one-stop shop" Style="{StaticResource HeadingTextStyle}"></TextBlock>
+        <TextBlock Text="for great music!" Style="{StaticResource HeadingTextStyle}"></TextBlock>
+        <Image Source="../Images/chinook.png" Width="300" Height="300" />
     </StackPanel>
 </Page>

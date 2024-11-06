@@ -4,6 +4,44 @@
              xmlns:local="clr-namespace:PROG2500_A2_Chinook"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- Style for the main heading TextBlock -->
+            <Style x:Key="HeadingTextStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="40"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </Style>
+
+            <!-- Style for the ListView -->
+            <Style x:Key="AlbumsListViewStyle" TargetType="ListView">
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Background" Value="#E6E6FA"/>
+                <Setter Property="BorderBrush" Value="#8A2BE2"/>
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
+
+            <!-- Style for GridViewColumnHeader -->
+            <Style x:Key="GridViewColumnHeaderStyle" TargetType="GridViewColumnHeader">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Background" Value="#7B68EE"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
+
+            <!-- Style for ListView items -->
+        <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Foreground" Value="DarkBlue"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="LightGray"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#ADD8E6"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>

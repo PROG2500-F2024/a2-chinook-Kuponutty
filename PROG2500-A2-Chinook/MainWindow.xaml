@@ -6,7 +6,71 @@
         xmlns:local="clr-namespace:PROG2500_A2_Chinook"
         mc:Ignorable="d"
         Title="Chinook Music Store" Height="650" Width="900">
-    <Grid>
-
-    </Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <BitmapImage x:Key="HomeImage" UriSource="Images/home.png" />
+            <BitmapImage x:Key="ArtistsImage" UriSource="Images/artists.png" />
+            <BitmapImage x:Key="AlbumsImage" UriSource="Images/albums.png" />
+            <BitmapImage x:Key="TracksImage" UriSource="Images/tracks.png" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Exit" Click="ExitButton_Click" />
+            </MenuItem>
+            <MenuItem Header="Pages">
+                <MenuItem x:Name="Home" Header="_Home" Click="HomeButton_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource HomeImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="Artists" Header="_Artists" Click="ArtistsButton_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ArtistsImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="Albums" Header="_Albums" Click="AlbumsButton_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource AlbumsImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="Tracks" Header="_Tracks" Click="TracksButton_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource TracksImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <Border Background="MediumPurple" DockPanel.Dock="Top">
+            <TextBlock x:Name="Heading" Text="Chinook Music Store"
+                   HorizontalAlignment="Center" FontSize="24" FontWeight="Bold"
+                   Foreground="White" Padding="10"/>
+        </Border>
+        <Border Background="MediumPurple" DockPanel.Dock="Left" Width="50">
+            <StackPanel Orientation="Vertical" Width="50" HorizontalAlignment="Center">
+                <Button x:Name="HomeButton" ToolTip="Go to Home" Click="HomeButton_Click" Background="White">
+                    <Button.Content>
+                        <Image Source="{StaticResource HomeImage}"  Width="32" Height="32"/>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="ArtistsButton" ToolTip="Go to Artists" Click="ArtistsButton_Click" Background="White">
+                    <Button.Content>
+                        <Image Source="{StaticResource ArtistsImage}"  Width="32" Height="32"/>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="AlbumsButton" ToolTip="Go to Albums" Click="AlbumsButton_Click" Background="White">
+                    <Button.Content>
+                        <Image Source="{StaticResource AlbumsImage}"  Width="32" Height="32"/>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="TracksButton" ToolTip="Go to Tracks" Click="TracksButton_Click" Background="White">
+                    <Button.Content>
+                        <Image Source="{StaticResource TracksImage}"  Width="32" Height="32"/>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </Border>
+        <Frame x:Name="mainFrame" DockPanel.Dock="Bottom" Width="Auto" Height="Auto" NavigationUIVisibility="Hidden"></Frame>
+    </DockPanel>
 </Window>

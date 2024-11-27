@@ -12,6 +12,8 @@
             <BitmapImage x:Key="ArtistsImage" UriSource="Images/artists.png" />
             <BitmapImage x:Key="AlbumsImage" UriSource="Images/albums.png" />
             <BitmapImage x:Key="TracksImage" UriSource="Images/tracks.png" />
+            <BitmapImage x:Key="CatalogueImage" UriSource="Images/catalogue.png" />
+            <BitmapImage x:Key="OrderImage" UriSource="Images/order.png" />
         </ResourceDictionary>
     </Window.Resources>
     <DockPanel>
@@ -42,12 +44,12 @@
                 </MenuItem>
                 <MenuItem x:Name="Catalogue" Header="_Catalogue" Click="CatalogueButton_Click">
                 <MenuItem.Icon>
-                    <Image Source="{StaticResource TracksImage}" />
+                    <Image Source="{StaticResource CatalogueImage}" />
                 </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem x:Name="Orders" Header="_Order" Click="OrdersButton_Click">
                     <MenuItem.Icon>
-                        <Image Source="{StaticResource TracksImage}" />
+                        <Image Source="{StaticResource OrderImage}" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -77,6 +79,16 @@
                 <Button x:Name="TracksButton" ToolTip="Go to Tracks" Click="TracksButton_Click" Background="White">
                     <Button.Content>
                         <Image Source="{StaticResource TracksImage}"  Width="32" Height="32"/>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="CatalogueButton" ToolTip="Go to Catalogue" Click="CatalogueButton_Click" Background="White">
+                    <Button.Content>
+                        <Image Source="{StaticResource CatalogueImage}"  Width="32" Height="32"/>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="OrderButton" ToolTip="Go to Tracks" Click="OrdersButton_Click" Background="White">
+                    <Button.Content>
+                        <Image Source="{StaticResource OrderImage}"  Width="32" Height="32"/>
                     </Button.Content>
                 </Button>
             </StackPanel>

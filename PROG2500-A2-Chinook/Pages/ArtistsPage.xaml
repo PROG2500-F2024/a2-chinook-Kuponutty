@@ -16,13 +16,12 @@
 
             <TextBlock Text="Chinook Artists Page" Style="{StaticResource HeadingTextStyle}"></TextBlock>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,10" HorizontalAlignment="Center">
-                <TextBlock Text="Search for Artist: " Margin="5" Background="White" />
+                <TextBlock Text="Search for Artist: " Margin="5" Style="{StaticResource TextBlockStyle}" />
                 <TextBox x:Name="SearchBox" Width="200"  Background="White" Margin="5" />
                 <Button Content="Search" Width="80" Click="SearchButton_Click" />
             </StackPanel>
             <ListView ItemsSource="{Binding Source={StaticResource artistsViewSource}}"
-                      Style="{StaticResource AlbumsListViewStyle}"
-                      ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                      Style="{StaticResource AlbumsListViewStyle}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ArtistId}" Width="100"/>

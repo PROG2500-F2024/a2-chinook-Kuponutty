@@ -20,7 +20,7 @@
             <!-- Page Heading -->
             <TextBlock Text="Chinook Tracks Page" Style="{StaticResource HeadingTextStyle}"></TextBlock>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,10" HorizontalAlignment="Center">
-                <TextBlock Text="Search for Track/Composer: " Background="White"  VerticalAlignment="Center"/>
+                <TextBlock Text="Search for Track/Composer: " Style="{StaticResource TextBlockStyle}"  VerticalAlignment="Center"/>
                 <TextBox x:Name="SearchBox" Width="200"  Background="White" Margin="5" />
                 <Button Content="Search" Width="80" Click="SearchButton_Click" />
             </StackPanel>

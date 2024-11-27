@@ -39,18 +39,18 @@ namespace PROG2500_A2_Chinook.Pages
 
 			if (!string.IsNullOrWhiteSpace(search))
 			{
-				artistsViewSource.View.Filter = item =>
-				{
-					if (item is Artist artist)
-					{
-						return artist.Name?.Contains(search, StringComparison.CurrentCultureIgnoreCase) ?? false;
-					}
-					return false;
-				};
+				// Use LINQ to filter the artists
+				var filteredArtists = context.Artists.Local
+					.Where(artist =>
+						artist.Name?.Contains(search, StringComparison.CurrentCultureIgnoreCase) ?? false)
+					.ToList();
+
+				artistsViewSource.Source = filteredArtists;
 			}
 			else
 			{
-				artistsViewSource.View.Filter = null;
+
+				artistsViewSource.Source = context.Artists.Local.ToObservableCollection();
 			}
 		}
 	}

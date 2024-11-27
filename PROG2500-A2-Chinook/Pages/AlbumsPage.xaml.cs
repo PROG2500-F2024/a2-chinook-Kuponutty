@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace PROG2500_A2_Chinook.Pages
 {
@@ -39,18 +40,19 @@ namespace PROG2500_A2_Chinook.Pages
 
 			if (!string.IsNullOrWhiteSpace(search))
 			{
-				albumsViewSource.View.Filter = item =>
-				{
-					if (item is Album album)
-					{
-						return album.Title?.Contains(search, StringComparison.CurrentCultureIgnoreCase) ?? false;
-					}
-					return false;
-				};
+				// Use LINQ to filter the albums
+				var filteredAlbums = context.Albums.Local
+					.Where(album =>
+						album.Title?.Contains(search, StringComparison.CurrentCultureIgnoreCase) ?? false)
+					.ToList();
+
+				// Update the CollectionViewSource with the filtered albums
+				albumsViewSource.Source = filteredAlbums;
 			}
 			else
 			{
-				albumsViewSource.View.Filter = null;
+				// Reset the CollectionViewSource to show all albums
+				albumsViewSource.Source = context.Albums.Local.ToObservableCollection();
 			}
 		}
 	}

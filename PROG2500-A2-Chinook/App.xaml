@@ -32,16 +32,88 @@
 
             <!-- Style for ListView items -->
         <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="BorderBrush" Value="Black" />
-            <Setter Property="Foreground" Value="Purple"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="AntiqueWhite"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#ADD8E6"/>
-                </Trigger>
-            </Style.Triggers>
+            <!-- Override the default ControlTemplate -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!-- Default properties -->
+            <Setter Property="Background" Value="MediumPurple"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="CatalogueViewItemStyle" TargetType="ListViewItem">
+            <!-- Disable selection and mouse-over effects -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!-- Set default properties -->
+            <Setter Property="Background" Value="MediumPurple" />
+            <Setter Property="BorderBrush" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="Expander">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Background" Value="MediumPurple" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            
+        </Style>
+
+        <!-- Style for Artist-Level Borders -->
+        <Style x:Key="ArtistBorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="White" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+        </Style>
+
+        <!-- Style for Album-Level Borders -->
+        <Style x:Key="AlbumBorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="White" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+        </Style>
+        
+        <!-- Style for Track-Level Borders -->
+        <Style x:Key="TrackBorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="White" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+        </Style>
+
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Background" Value="MediumPurple" />
+            <Setter Property="Foreground" Value="White" />
         </Style>
 
         <Style x:Key="StackPanelStyle" TargetType="StackPanel">

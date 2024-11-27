@@ -39,20 +39,21 @@ namespace PROG2500_A2_Chinook.Pages
 
 			if (!string.IsNullOrWhiteSpace(search))
 			{
-				tracksViewSource.View.Filter = item =>
-				{
-					if (item is Track track)
-					{
-						return (track.Name?.Contains(search, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
-							(track.Composer?.Contains(search, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
-							(track.UnitPrice.ToString().Contains(search));
-					}
-					return false;
-				};
+				// Use LINQ to filter the tracks
+				var filteredTracks = context.Tracks.Local
+					.Where(track =>
+						(track.Name?.Contains(search, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+						(track.Composer?.Contains(search, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
+						track.UnitPrice.ToString().Contains(search))
+					.ToList();
+
+				
+				tracksViewSource.Source = filteredTracks;
 			}
 			else
 			{
-				tracksViewSource.View.Filter = null;
+				
+				tracksViewSource.Source = context.Tracks.Local.ToObservableCollection();
 			}
 		}
 	}

@@ -40,6 +40,16 @@
                         <Image Source="{StaticResource TracksImage}" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem x:Name="Catalogue" Header="_Catalogue" Click="CatalogueButton_Click">
+                <MenuItem.Icon>
+                    <Image Source="{StaticResource TracksImage}" />
+                </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="Orders" Header="_Order" Click="OrdersButton_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource TracksImage}" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
         <Border Background="MediumPurple" DockPanel.Dock="Top">

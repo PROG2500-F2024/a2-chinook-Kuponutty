@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PROG2500_A2_Chinook.Data;
+using PROG2500_A2_Chinook.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,27 @@ namespace PROG2500_A2_Chinook.Pages
 			artistsViewSource = (CollectionViewSource)FindResource(nameof(artistsViewSource));
 			context.Artists.Load();
 			artistsViewSource.Source = context.Artists.Local.ToObservableCollection();
+		}
+
+		private void SearchButton_Click(object sender, RoutedEventArgs e)
+		{
+			string search = SearchBox.Text.ToLower();
+
+			if (!string.IsNullOrWhiteSpace(search))
+			{
+				artistsViewSource.View.Filter = item =>
+				{
+					if (item is Artist artist)
+					{
+						return artist.Name?.Contains(search, StringComparison.CurrentCultureIgnoreCase) ?? false;
+					}
+					return false;
+				};
+			}
+			else
+			{
+				artistsViewSource.View.Filter = null;
+			}
 		}
 	}
 }

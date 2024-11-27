@@ -47,6 +47,6 @@
         <Style x:Key="StackPanelStyle" TargetType="StackPanel">
             <Setter Property="Background" Value="MediumPurple" />
         </Style>
-        
+
     </Application.Resources>
 </Application>

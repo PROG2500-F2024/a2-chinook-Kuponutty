@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PROG2500_A2_Chinook.Data;
+using PROG2500_A2_Chinook.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,27 @@ namespace PROG2500_A2_Chinook.Pages
 			albumsViewSource = (CollectionViewSource)FindResource(nameof(albumsViewSource));
 			context.Albums.Load();
 			albumsViewSource.Source = context.Albums.Local.ToObservableCollection();
+		}
+
+		private void SearchButton_Click(object sender, RoutedEventArgs e)
+		{
+			string search = SearchBox.Text.ToLower();
+
+			if (!string.IsNullOrWhiteSpace(search))
+			{
+				albumsViewSource.View.Filter = item =>
+				{
+					if (item is Album album)
+					{
+						return album.Title?.Contains(search, StringComparison.CurrentCultureIgnoreCase) ?? false;
+					}
+					return false;
+				};
+			}
+			else
+			{
+				albumsViewSource.View.Filter = null;
+			}
 		}
 	}
 }

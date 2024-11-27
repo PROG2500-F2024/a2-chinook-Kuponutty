@@ -19,6 +19,11 @@
         <StackPanel Style="{StaticResource StackPanelStyle}">
             <!-- Page Heading -->
             <TextBlock Text="Chinook Tracks Page" Style="{StaticResource HeadingTextStyle}"></TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,10" HorizontalAlignment="Center">
+                <TextBlock Text="Search for Track/Composer: " Background="White"  VerticalAlignment="Center"/>
+                <TextBox x:Name="SearchBox" Width="200"  Background="White" Margin="5" />
+                <Button Content="Search" Width="80" Click="SearchButton_Click" />
+            </StackPanel>
 
             <!-- ListView for Track Items -->
             <ListView ItemsSource="{Binding Source={StaticResource tracksViewSource}}"
@@ -35,7 +40,10 @@
                             <!-- Left-aligned fields: Name and Composer -->
                             <StackPanel Grid.Column="0">
                                 <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="18"/>
-                                <TextBlock FontSize="12" Text="Composer: {Binding Composer}" />
+                                <TextBlock>
+                                        <Run Text="Composer: " />
+                                        <Run Text="{Binding Composer}" />
+                                </TextBlock>
                             </StackPanel>
 
                             <!-- Right-aligned fields: Length, Size, and Price -->

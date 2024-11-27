@@ -32,47 +32,32 @@ namespace PROG2500_A2_Chinook.Pages
 
 			context = new ChinookContext();
 
-			// Load Customers into the context
+			// Load initial customer data using LINQ
 			var customers = context.Customers
-								   .Include(c => c.Invoices)
-								   .ThenInclude(i => i.InvoiceLines)
-								   .ToList();
+				.Include(c => c.Invoices)
+				.ThenInclude(i => i.InvoiceLines)
+				.ToList();
 
-			// Ensure CollectionViewSource is correctly bound
 			ordersViewSource = (CollectionViewSource)FindResource("CustomerOrdersViewSource");
 			ordersViewSource.Source = customers;
 		}
 
 		private void SearchButton_Click(object sender, RoutedEventArgs e)
 		{
-			string search = SearchBox.Text?.ToLower();
+			string? search = SearchBox.Text?.Trim().ToLower();
 
-			if (!string.IsNullOrWhiteSpace(search))
-			{
-				// Use LINQ to filter the customers based on the search text
-				var filteredCustomers = context.Customers
-					.Include(c => c.Invoices)
-					.ThenInclude(i => i.InvoiceLines)
-					.Where(c =>
-						(c.FirstName != null && c.FirstName.ToLower().Contains(search)) ||
-						(c.LastName != null && c.LastName.ToLower().Contains(search)) ||
-						(c.Email != null && c.Email.ToLower().Contains(search)) ||
-						(c.Country != null && c.Country.ToLower().Contains(search)))
-					.ToList();
+			var customersQuery = context.Customers
+				.Include(c => c.Invoices)
+				.ThenInclude(i => i.InvoiceLines)
+				.Where(c =>
+					string.IsNullOrWhiteSpace(search) ||
+					(c.FirstName != null && EF.Functions.Like(c.FirstName, $"%{search}%")) ||
+					(c.LastName != null && EF.Functions.Like(c.LastName, $"%{search}%")) ||
+					(c.Email != null && EF.Functions.Like(c.Email, $"%{search}%")) ||
+					(c.Country != null && EF.Functions.Like(c.Country, $"%{search}%")))
+				.ToList();
 
-				// Update the CollectionViewSource with the filtered list
-				ordersViewSource.Source = filteredCustomers;
-			}
-			else
-			{
-				// Reset to show all customers if search is empty
-				var allCustomers = context.Customers
-										  .Include(c => c.Invoices)
-										  .ThenInclude(i => i.InvoiceLines)
-										  .ToList();
-
-				ordersViewSource.Source = allCustomers;
-			}
+			ordersViewSource.Source = customersQuery;
 		}
 	}
 }

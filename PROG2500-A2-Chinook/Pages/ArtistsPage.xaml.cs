@@ -22,36 +22,37 @@ namespace PROG2500_A2_Chinook.Pages
 	/// </summary>
 	public partial class ArtistsPage : Page
 	{
-		ChinookContext context = new ChinookContext();
-		CollectionViewSource artistsViewSource = new CollectionViewSource();
+		private readonly ChinookContext context;
+		private readonly CollectionViewSource artistsViewSource;
+
 		public ArtistsPage()
 		{
 			InitializeComponent();
 
+			context = new ChinookContext();
 			artistsViewSource = (CollectionViewSource)FindResource(nameof(artistsViewSource));
-			context.Artists.Load();
-			artistsViewSource.Source = context.Artists.Local.ToObservableCollection();
+
+			LoadArtists(null);
 		}
 
 		private void SearchButton_Click(object sender, RoutedEventArgs e)
 		{
-			string search = SearchBox.Text.ToLower();
+			string? search = SearchBox.Text?.Trim().ToLower();
 
-			if (!string.IsNullOrWhiteSpace(search))
-			{
-				// Use LINQ to filter the artists
-				var filteredArtists = context.Artists.Local
-					.Where(artist =>
-						artist.Name?.Contains(search, StringComparison.CurrentCultureIgnoreCase) ?? false)
-					.ToList();
+			LoadArtists(search);
+		}
 
-				artistsViewSource.Source = filteredArtists;
-			}
-			else
-			{
+		private void LoadArtists(string? search)
+		{
+			// LINQ query to get all or filtered artists
+			var artistsQuery = context.Artists
+				.Where(artist => string.IsNullOrWhiteSpace(search) ||
+								 EF.Functions.Like(artist.Name, $"%{search}%"))
+				.AsNoTracking()
+				.ToList();
 
-				artistsViewSource.Source = context.Artists.Local.ToObservableCollection();
-			}
+			// Update the CollectionViewSource with the query result
+			artistsViewSource.Source = artistsQuery;
 		}
 	}
 }

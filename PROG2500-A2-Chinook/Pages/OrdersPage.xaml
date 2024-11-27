@@ -36,8 +36,8 @@
                                     <TextBlock Style="{StaticResource TextBlockStyle}">
                                         <TextBlock.Text>
                                             <MultiBinding StringFormat="{}{0}, {1}">
-                                                <Binding Path="City" />
-                                                <Binding Path="State" />
+                                                <Binding Path="City" TargetNullValue="Unknown City" />
+                                                <Binding Path="State" TargetNullValue="Unknown State" />
                                             </MultiBinding>
                                         </TextBlock.Text>
                                     </TextBlock>

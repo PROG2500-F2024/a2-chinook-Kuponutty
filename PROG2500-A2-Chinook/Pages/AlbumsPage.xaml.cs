@@ -23,37 +23,37 @@ namespace PROG2500_A2_Chinook.Pages
 	/// </summary>
 	public partial class AlbumsPage : Page
 	{
-		ChinookContext context = new ChinookContext();
-		CollectionViewSource albumsViewSource = new CollectionViewSource();
+		private readonly ChinookContext context;
+		private readonly CollectionViewSource albumsViewSource;
+
 		public AlbumsPage()
 		{
 			InitializeComponent();
 
+			context = new ChinookContext();
 			albumsViewSource = (CollectionViewSource)FindResource(nameof(albumsViewSource));
-			context.Albums.Load();
-			albumsViewSource.Source = context.Albums.Local.ToObservableCollection();
+
+			LoadAlbums(null);
 		}
 
 		private void SearchButton_Click(object sender, RoutedEventArgs e)
 		{
-			string search = SearchBox.Text.ToLower();
+			string? search = SearchBox.Text?.Trim().ToLower();
 
-			if (!string.IsNullOrWhiteSpace(search))
-			{
-				// Use LINQ to filter the albums
-				var filteredAlbums = context.Albums.Local
-					.Where(album =>
-						album.Title?.Contains(search, StringComparison.CurrentCultureIgnoreCase) ?? false)
-					.ToList();
+			LoadAlbums(search);
+		}
 
-				// Update the CollectionViewSource with the filtered albums
-				albumsViewSource.Source = filteredAlbums;
-			}
-			else
-			{
-				// Reset the CollectionViewSource to show all albums
-				albumsViewSource.Source = context.Albums.Local.ToObservableCollection();
-			}
+		private void LoadAlbums(string? search)
+		{
+			// LINQ query to get all or filtered albums
+			var albumsQuery = context.Albums
+				.Where(album => string.IsNullOrWhiteSpace(search) ||
+								EF.Functions.Like(album.Title, $"%{search}%"))
+				.AsNoTracking()
+				.ToList();
+
+			// Update the CollectionViewSource with the query result
+			albumsViewSource.Source = albumsQuery;
 		}
 	}
 }

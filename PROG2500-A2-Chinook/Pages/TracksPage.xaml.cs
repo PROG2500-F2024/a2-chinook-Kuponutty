@@ -24,37 +24,31 @@ namespace PROG2500_A2_Chinook.Pages
 	{
 		ChinookContext context = new ChinookContext();
 		CollectionViewSource tracksViewSource = new CollectionViewSource();
+
 		public TracksPage()
 		{
 			InitializeComponent();
 
 			tracksViewSource = (CollectionViewSource)FindResource(nameof(tracksViewSource));
-			context.Tracks.Load();
-			tracksViewSource.Source = context.Tracks.Local.ToObservableCollection();
+			tracksViewSource.Source = context.Tracks
+				.AsNoTracking()
+				.ToList();
 		}
 
 		private void SearchButton_Click(object sender, RoutedEventArgs e)
 		{
-			string search = SearchBox.Text.ToLower();
+			string? search = SearchBox.Text?.Trim().ToLower();
 
-			if (!string.IsNullOrWhiteSpace(search))
-			{
-				// Use LINQ to filter the tracks
-				var filteredTracks = context.Tracks.Local
-					.Where(track =>
-						(track.Name?.Contains(search, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
-						(track.Composer?.Contains(search, StringComparison.CurrentCultureIgnoreCase) ?? false) ||
-						track.UnitPrice.ToString().Contains(search))
-					.ToList();
+			var tracksQuery = context.Tracks
+				.AsNoTracking()
+				.Where(track =>
+					string.IsNullOrWhiteSpace(search) ||
+					(track.Name != null && EF.Functions.Like(track.Name, $"%{search}%")) ||
+					(track.Composer != null && EF.Functions.Like(track.Composer, $"%{search}%")) ||
+					track.UnitPrice.ToString().Contains(search))
+				.ToList();
 
-				
-				tracksViewSource.Source = filteredTracks;
-			}
-			else
-			{
-				
-				tracksViewSource.Source = context.Tracks.Local.ToObservableCollection();
-			}
+			tracksViewSource.Source = tracksQuery;
 		}
 	}
 }
